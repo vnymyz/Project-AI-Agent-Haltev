@@ -1,0 +1,51 @@
+id_pegawai,nama_lengkap,umur,posisi_pekerjaan,tipe_kontrak,join_date,leave_day,izin_sakit,izin_tanpa_keterangan,gaji,status_kerja
+EMP001,Andi Pratama,29,Backend Engineer,Fulltime,2020-03-01,5,2,0,9000000,Active
+EMP002,Budi Santoso,35,Frontend Engineer,Fulltime,2019-07-15,3,1,0,8500000,Active
+EMP003,Siti Aisyah,27,Data Analyst,Contract,2021-01-10,,0,0,7000000,Active
+EMP004,Rizky Maulana,31,DevOps Engineer,Fulltime,2018-11-20,4,3,1,10000000,Active
+EMP005,Dewi Lestari,26,UI UX Designer,Part-time,2022-06-01,,1,0,5000000,Active
+EMP006,Fajar Nugroho,40,Project Manager,Fulltime,2017-02-13,6,2,0,13000000,Active
+EMP007,Nina Kartika,28,Quality Assurance,Contract,2021-09-05,2,0,0,6500000,Active
+EMP008,Agus Setiawan,45,System Administrator,Fulltime,2016-04-18,5,4,2,11000000,Active
+EMP009,Maya Putri,30,HR Specialist,Fulltime,2019-12-02,3,1,0,8000000,Active
+EMP010,Ilham Ramadhan,24,Intern Developer,Contract,2023-01-09,,0,0,3500000,Active
+EMP011,Rina Wulandari,34,Finance Analyst,Fulltime,2018-08-27,4,2,0,9500000,Active
+EMP012,Yoga Prakoso,37,Mobile Developer,Fulltime,2017-05-16,5,1,1,9800000,Active
+EMP013,Lina Oktaviani,29,Content Writer,Part-time,2021-11-11,,0,0,4500000,Active
+EMP014,Hendra Saputra,42,IT Support,Fulltime,2015-03-30,6,3,2,8700000,Active
+EMP015,Sarah Amalia,33,Product Owner,Fulltime,2019-04-22,4,1,0,12000000,Active
+EMP016,Dimas Kurniawan,28,Data Engineer,Fulltime,2020-10-14,3,0,0,9200000,Active
+EMP017,Putra Adi,39,Security Engineer,Contract,2018-06-25,2,2,1,9000000,Active
+EMP018,Novi Anggraini,25,Customer Support,Fulltime,2022-02-07,,1,0,4800000,Active
+EMP019,Eko Firmansyah,41,Network Engineer,Fulltime,2016-09-19,5,3,1,10500000,Resigned
+EMP020,Tika Maharani,32,Marketing Analyst,Fulltime,2020-01-06,3,1,0,8200000,Active
+EMP021,Rafi Ahmad,29,Sales Executive,Fulltime,2019-05-23,4,0,0,7800000,Active
+EMP022,Lia Sari,27,Business Analyst,Contract,2021-03-15,,0,0,7300000,Active
+EMP023,Arif Hidayat,36,Technical Writer,Part-time,2018-12-09,2,1,0,6000000,Active
+EMP024,Indah Permatasari,30,SEO Specialist,Fulltime,2017-07-29,4,2,0,8800000,Active
+EMP025,Felix Gunawan,38,Cloud Architect,Fulltime,2015-10-12,6,3,1,14000000,Active
+EMP026,Susan Wijaya,31,Social Media Manager,Fulltime,2019-11-03,3,1,0,7600000,Active
+EMP027,Aditya Pratama,26,Graphic Designer,Part-time,2022-05-17,,0,0,5200000,Active
+EMP028,Melati Kusuma,34,Content Strategist,Fulltime,2018-02-21,5,2,0,9300000,Active
+EMP029,Reza Fahlevi,29,AI Specialist,Fulltime,2020-08-30,4,1,0,11500000,Active
+EMP030,Citra Dewi,28,Web Developer,Contract,2021-06-12,2,0,0,6800000,Active
+EMP031,Doni Prasetyo,33,Cybersecurity Analyst,Fulltime,2017-04-05,5,2,1,10200000,Active
+EMP032,Linda Sari,24,Intern Marketing,Contract,2023-02-20,,0,0,3200000,Active
+EMP033,Agnes Monica,39,PR Manager,Fulltime,2016-11-14,6,3,0,12500000,Active
+EMP034,Ryan Kurnia,30,Data Scientist,Fulltime,2019-09-27,3,1,0,9800000,Active
+EMP035,Tina Melinda,27,UX Researcher,Part-time,2021-12-08,,0,0,5400000,Active
+EMP036,Farhan Syahputra,41,Solutions Architect,Fulltime,2015-06-19,5,2,1,13500000,Active
+EMP037,Nadia Putri,28,Digital Marketer,Fulltime,2020-11-23,4,1,0,8100000,Active
+EMP038,Ilham Fauzi,35,Software Tester,Contract,2018-03-14,2,0,0,7200000,Active
+EMP039,Anita Sari,32,HR Manager,Fulltime,2017-08-30,4,2,0,11500000,Active
+EMP040,Kevin Wijaya,29,Fullstack Developer,Fulltime,2019-10-16,3,1,0,9500000,Active
+EMP041,Sari Melati,26,Content Creator,Part-time,2022-03-05,,0,0,4700000,Active
+EMP042,Dedi Susanto,38,IT Manager,Fulltime,2016-01-22,6,3,1,12800000,Active
+EMP043,Fitriani Rahma,31,Data Visualization Specialist,Fulltime,2018-05-11,5,1,0,8900000,Active
+EMP044,Arman Hadi,34,Network Administrator,Fulltime,2017-09-18,4,2,0,9700000,Active
+EMP045,Lina Marlina,27,Technical Support,Contract,2021-04-29,,0,0,6600000,Active
+EMP046,Rico Valentino,40,Chief Technology Officer,Fulltime,2014-12-01,7,2,0,20000000,Active
+EMP047,Anisa Putri,29,Digital Content Manager,Fulltime,2019-06-14,3,1,0,8800000,Active
+EMP048,Bayu Pratama,36,Software Architect,Fulltime,2015-08-25,5,2,1,15000000,Active
+EMP049,Melinda Sari,33,Marketing Manager,Fulltime,2017-11-07,4,1,0,11200000,Active
+EMP050,Dian Anggraini,25,Junior Developer,Contract,2022-09-12,,0,0,6000000,Active
