@@ -1,4 +1,5 @@
 from agent.agent import ai_agent
+from agent.nlp import detect_intent
 
 tests = [
     "berapa lama Andi bekerja",
@@ -15,6 +16,7 @@ tests = [
 ]
 
 for t in tests:
-    print("Q:", t)
-    print("A:", ai_agent(t))
-    print("-" * 50)
+    print("Q :", t)
+    print("Intent :", detect_intent(t))
+    print("A :", ai_agent(t))
+    print("-" * 60)

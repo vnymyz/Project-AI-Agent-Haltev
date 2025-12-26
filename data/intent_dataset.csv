@@ -1,0 +1,70 @@
+text,intent
+berapa lama andi bekerja,lama_kerja
+andi sudah kerja berapa tahun,lama_kerja
+sudah berapa lama andi kerja,lama_kerja
+lama kerja andi berapa,lama_kerja
+
+gaji budi berapa,gaji
+berapa salary budi,gaji
+berapa gaji budi sekarang,gaji
+info gaji budi,gaji
+
+izin sakit rizky,izin_sakit
+rizky sakit berapa hari,izin_sakit
+berapa hari rizky sakit,izin_sakit
+jumlah izin sakit rizky,izin_sakit
+
+cuti siti,leave_day
+berapa cuti siti,leave_day
+sisa cuti siti berapa,leave_day
+cuti yang dimiliki siti,leave_day
+
+izin tanpa keterangan agus,izin_tanpa_keterangan
+agus bolos berapa kali,izin_tanpa_keterangan
+izin tanpa keterangan agus berapa,izin_tanpa_keterangan
+
+posisi kerja dewi,posisi
+jabatan dewi apa,posisi
+dewi kerja sebagai apa,posisi
+
+status kerja eko,status
+eko masih kerja atau tidak,status
+status karyawan eko,status
+
+data lengkap maya,profil_lengkap
+tampilkan data maya,profil_lengkap
+info lengkap maya,profil_lengkap
+profil karyawan maya,profil_lengkap
+
+berapa kali izin sakit,izin_sakit
+izin sakit berapa kali,izin_sakit
+jumlah izin sakit,izin_sakit
+berapa hari izin sakit,izin_sakit
+izin sakit karyawan,izin_sakit
+
+info cuti,leave_day
+berapa sisa cuti,leave_day
+jumlah cuti,leave_day
+cuti yang tersedia,leave_day
+
+data lengkap karyawan,profil_lengkap
+tampilkan profil karyawan,profil_lengkap
+info karyawan,profil_lengkap
+
+izin sakitnya berapa,izin_sakit
+cutinya berapa,leave_day
+statusnya gimana,status
+
+berapa gaji karyawan,gaji
+info gaji,gaji
+berapa salary karyawan,gaji
+gaji berapa,gaji
+
+izin tanpa keterangan berapa,izin_tanpa_keterangan
+berapa kali tanpa keterangan,izin_tanpa_keterangan
+jumlah bolos,izin_tanpa_keterangan
+
+informasi karyawan,status
+detail pegawai,profil_lengkap
+riwayat kerja karyawan,lama_kerja
+

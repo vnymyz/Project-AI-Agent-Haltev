@@ -5,7 +5,7 @@
     <title>AI Agent Karyawan</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
+      href="{{ url_for('static', filename='style.css') }}?v=5"
     />
   </head>
   <body>
@@ -14,19 +14,46 @@
 
       <div id="chat" class="chat-box"></div>
 
-      <input type="text" id="input" placeholder="Tanya data karyawan..." />
+      <input
+        type="text"
+        id="input"
+        placeholder="Tanya data karyawan..."
+        onkeydown="if(event.key==='Enter') sendMessage()"
+      />
       <button onclick="sendMessage()">Kirim</button>
     </div>
 
     <script>
+      function formatResponse(text) {
+        if (text.includes("Nama:") && text.includes("Umur:")) {
+          const rows = text.split("\n").map((line) => {
+            const [key, value] = line.split(":");
+            return `<tr><th>${key}</th><td>${value}</td></tr>`;
+          });
+
+          return `
+            <table class="data-table">
+              ${rows.join("")}
+            </table>
+          `;
+        }
+
+        return `<p>${text}</p>`;
+      }
+
       async function sendMessage() {
         const input = document.getElementById("input");
         const chat = document.getElementById("chat");
-        const message = input.value;
+        const message = input.value.trim();
 
         if (!message) return;
 
-        chat.innerHTML += `<div class="message user">You: ${message}</div>`;
+        chat.innerHTML += `
+          <div class="message user">
+            <div class="bubble user-bubble">${message}</div>
+          </div>
+        `;
+
         input.value = "";
 
         const response = await fetch("/chat", {
@@ -36,7 +63,15 @@
         });
 
         const data = await response.json();
-        chat.innerHTML += `<div class="message ai">AI: ${data.response}</div>`;
+
+        chat.innerHTML += `
+          <div class="message ai">
+            <div class="bubble ai-bubble">
+              ${formatResponse(data.response)}
+            </div>
+          </div>
+        `;
+
         chat.scrollTop = chat.scrollHeight;
       }
     </script>

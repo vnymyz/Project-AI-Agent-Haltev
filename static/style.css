@@ -26,20 +26,18 @@ body {
   background: #fafafa;
 }
 
+/* MESSAGE */
 .message {
+  display: flex;
   margin-bottom: 10px;
-  line-height: 1.4;
 }
 
 .message.user {
-  text-align: right;
-  color: #0b5ed7;
-  font-weight: bold;
+  justify-content: flex-end;
 }
 
 .message.ai {
-  text-align: left;
-  color: #212529;
+  justify-content: flex-start;
 }
 
 input[type="text"] {
@@ -64,4 +62,53 @@ button {
 
 button:hover {
   background-color: #0b5ed7;
+}
+
+.message {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message.ai {
+  justify-content: flex-start;
+}
+
+/* BUBBLE */
+.bubble {
+  max-width: 80%;
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+.user-bubble {
+  background-color: #0d6efd;
+  color: white;
+  border-bottom-right-radius: 0;
+}
+
+.ai-bubble {
+  background-color: #e9ecef;
+  color: #212529;
+  border-bottom-left-radius: 0;
+}
+
+/* TABLE */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  text-align: left;
+  background: #f1f3f5;
+  padding: 6px;
+  width: 40%;
+}
+
+.data-table td {
+  padding: 6px;
 }
