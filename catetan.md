@@ -35,3 +35,17 @@ Fallback default
 ```
 
 5. intent_dataset.csv ini tuh buat data training atau melatih. kalau intent_model.pkl itu sebagai otak ML nya / pengetahuan yang udah ada di kepala. kalau nlp.py itu sebagai Otak keputusannya (RUNTIME) / yang Mengatur bagaimana dia bekerja di lapangan
+
+### 30 Desember 2025, Selasa.
+
+1. Struktur Folder Agent
+
+```bash
+agent/
+ ├─ agent.py           ← ORKESTRATOR SAJA
+ ├─ intent_parser.py   ← OpenAI intent
+ ├─ query_engine.py    ← Pandas filter
+ ├─ table_renderer.py  ← HTML output
+ ├─ fallback_ml.py     ← ML lama (backup)
+ ├─ legacy_agent.py    ← ai_agent lama (dipindah)
+```

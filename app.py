@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-from agent.agent import ai_agent
-from agent.nlp import detect_intent
+from agent.agent import handle_message
 
 app = Flask(__name__)
 
@@ -19,15 +18,14 @@ def chat():
     if user_message == "":
         return jsonify({"response": "Silakan masukkan pertanyaan"}), 400
 
-    # 🔹 DEBUG: cek intent
-    intent = detect_intent(user_message)
-
-    # 🔹 MAIN AI RESPONSE
-    response = ai_agent(user_message)
+    try:
+        response = handle_message(user_message)
+    except Exception as e:
+        # fallback aman
+        response = "Terjadi kesalahan saat memproses permintaan."
 
     return jsonify({
         "user_input": user_message,
-        "detected_intent": intent,   # <-- penting buat testing
         "response": response
     })
 

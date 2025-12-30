@@ -1,3 +1,5 @@
+# NOTE:
+# This module is legacy and only used as fallback.
 import re
 import joblib
 from pathlib import Path
