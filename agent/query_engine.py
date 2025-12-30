@@ -18,7 +18,7 @@ def query_employee(intent_data):
         name = intent_data["name"]
         if not name:
             return df.iloc[0:0]
-        return df[df["nama_lengkap"] == name.lower()]
+        return df[df["nama_lengkap"].str.contains(name.lower())]
 
     if intent == "filter":
         result = df.copy()

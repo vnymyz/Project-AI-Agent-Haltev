@@ -11,14 +11,15 @@ from agent.openai_client import client
 
 INTENT_PROMPT = """
 Kamu adalah intent parser untuk sistem HR.
-Balas HANYA dalam format JSON berikut.
+Balas HANYA dalam format JSON.
 
 SELALU isi semua field.
-Jika tidak ada nilai, isi null.
+Jika tidak ada nilai, isi null atau false.
 
 {
   "intent": "get_all | get_by_name | filter",
   "name": null | string,
+  "detail": false | true,
   "filters": {
     "kontrak": null | string,
     "posisi": null | string,
@@ -26,6 +27,15 @@ Jika tidak ada nilai, isi null.
     "max_gaji": null | number
   }
 }
+
+Aturan PENTING:
+- intent = "get_all" jika user meminta data semua karyawan
+- detail = true jika user menyebut salah satu kata berikut:
+  "detail", "lengkap", "full", "seluruh", "semua kolom", "data lengkap"
+
+Contoh:
+- "tampilkan detail data karyawan" → intent=get_all, detail=true
+- "tampilkan data lengkap karyawan" → intent=get_all, detail=true
 """
 
 def parse_intent(user_message):
