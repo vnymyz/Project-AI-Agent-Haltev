@@ -8,68 +8,147 @@ from agent.fallback_ml import ml_fallback
 from agent.natural_response import explain_position
 
 # =========================
-# CONTEXT MEMORY (MVP)
+# CONTEXT MEMORY (FINAL)
 # =========================
 SESSION_CONTEXT = {
-    "active_employee": None
+    "active_employee": None,
+    "active_position": None
 }
 
 
 def handle_message(user_message: str):
     try:
         # =========================
-        # 1. PARSE INTENT
+        # NORMALIZE MESSAGE (WAJIB)
+        # =========================
+        msg = user_message.lower().strip()
+
+        # =========================
+        # BLOCK EVALUATIVE QUESTIONS
+        # =========================
+        EVALUATIVE_KEYWORDS = [
+            "paling rajin",
+            "paling bagus",
+            "terbaik",
+            "layak naik gaji",
+            "paling produktif",
+            "kinerja",
+            "performa"
+        ]
+
+        if any(k in msg for k in EVALUATIVE_KEYWORDS):
+            return (
+                "Penilaian kinerja dan rekomendasi kenaikan gaji "
+                "belum tersedia dalam sistem ini."
+            )
+
+        # =========================
+        # SWITCH EMPLOYEE INTENT
+        # =========================
+        SWITCH_KEYWORDS = [
+            "sekarang yang",
+            "balik ke",
+            "yang "
+        ]
+
+        for key in SWITCH_KEYWORDS:
+            if msg.startswith(key):
+                name = msg.replace(key, "").strip()
+                if name:
+                    return handle_message(f"tampilkan data {name}")
+
+        # =========================
+        # RESET CONTEXT ONLY FOR EXPLICIT ALL
+        # =========================
+        ALL_EMPLOYEE_KEYWORDS = [
+            "semua karyawan",
+            "seluruh karyawan",
+            "tampilkan semua",
+            "daftar karyawan"
+        ]
+
+        if any(k in msg for k in ALL_EMPLOYEE_KEYWORDS):
+            SESSION_CONTEXT["active_employee"] = None
+            SESSION_CONTEXT["active_position"] = None
+
+        # =========================
+        # PARSE INTENT
         # =========================
         intent = parse_intent(user_message)
 
         # =========================
-        # 2. CONTEXT & PRONOUN RESOLUTION
+        # IMPLICIT CONTEXT FOR ATTRIBUTE QUESTIONS
         # =========================
-        if not intent.get("name"):
-            if any(p in user_message.lower() for p in ["dia", "nya", "beliau"]):
-                if SESSION_CONTEXT["active_employee"]:
-                    intent["name"] = SESSION_CONTEXT["active_employee"]
-            elif SESSION_CONTEXT["active_employee"]:
-                intent["name"] = SESSION_CONTEXT["active_employee"]
+        ATTRIBUTE_COLUMNS = [
+            "gaji",
+            "umur",
+            "status_kerja",
+            "posisi_pekerjaan",
+            "tipe_kontrak",
+            "leave_day",
+            "izin_sakit",
+            "izin_tanpa_keterangan"
+        ]
+
+        if (
+            not intent.get("name")
+            and SESSION_CONTEXT["active_employee"]
+            and intent.get("primary_column") in ATTRIBUTE_COLUMNS
+        ):
+            intent["scope"] = "single"
+            intent["name"] = SESSION_CONTEXT["active_employee"]
 
         # =========================
-        # 3. QUERY DATA
+        # FORCE CONTEXT FOR EXPLAIN
+        # =========================
+        if (
+            intent.get("explain")
+            and intent.get("primary_column") == "posisi_pekerjaan"
+            and not intent.get("name")
+            and SESSION_CONTEXT["active_employee"]
+        ):
+            intent["scope"] = "single"
+            intent["name"] = SESSION_CONTEXT["active_employee"]
+
+        # =========================
+        # QUERY DATA
         # =========================
         df = query_employee(intent)
 
         # =========================
-        # 4. HANDLE AMBIGUOUS NAME
+        # HANDLE AMBIGUOUS NAME
         # =========================
-        if len(df) > 1 and intent["response_type"] == "text":
-            names = ", ".join(df["nama_lengkap"].str.title().tolist())
+        if (
+            len(df) > 1
+            and intent.get("response_type") == "text"
+            and not intent.get("explain")
+        ):
+            names = ", ".join(df["nama_lengkap"].str.title())
             return (
                 f"Ada beberapa karyawan yang cocok: {names}. "
                 "Mohon sebutkan nama lengkap."
             )
 
         # =========================
-        # 5. SAVE CONTEXT (ONLY IF SINGLE RESULT)
+        # SAVE CONTEXT
         # =========================
         if len(df) == 1:
             SESSION_CONTEXT["active_employee"] = df.iloc[0]["nama_lengkap"]
+            SESSION_CONTEXT["active_position"] = df.iloc[0]["posisi_pekerjaan"]
 
         # =========================
-        # 6. TEXT RESPONSE
+        # TEXT RESPONSE
         # =========================
-        if intent["response_type"] == "text":
+        if intent.get("response_type") == "text":
             col = intent.get("primary_column")
 
-            # --- EXPLANATION (JOB / ROLE) ---
             if intent.get("explain") and col == "posisi_pekerjaan":
-                if df.empty:
-                    return explain_position(position="posisi pekerjaan")
                 row = df.iloc[0]
                 return explain_position(
                     name=row["nama_lengkap"].title(),
                     position=row["posisi_pekerjaan"].title()
                 )
 
-            # --- DATA TEXT ---
             if df.empty:
                 return "Data karyawan tidak ditemukan."
 
@@ -79,49 +158,28 @@ def handle_message(user_message: str):
                 return f"Gaji {row['nama_lengkap'].title()} adalah Rp {int(row['gaji']):,}."
 
             if col == "status_kerja":
-                return (
-                    f"Status kerja {row['nama_lengkap'].title()} "
-                    f"adalah {row['status_kerja'].title()}."
-                )
-
-            if col == "posisi_pekerjaan":
-                return (
-                    f"{row['nama_lengkap'].title()} bekerja sebagai "
-                    f"{row['posisi_pekerjaan'].title()}."
-                )
+                return f"Status kerja {row['nama_lengkap'].title()} adalah {row['status_kerja'].title()}."
 
             if col == "umur":
                 return f"Umur {row['nama_lengkap'].title()} adalah {int(row['umur'])} tahun."
 
             if col == "leave_day":
-                return (
-                    f"{row['nama_lengkap'].title()} memiliki sisa cuti "
-                    f"{int(row['leave_day'])} hari."
-                )
+                if row["leave_day"] != row["leave_day"]:
+                    return f"{row['nama_lengkap'].title()} belum pernah mengambil cuti."
+                return f"{row['nama_lengkap'].title()} memiliki sisa cuti {int(row['leave_day'])} hari."
 
-            if col == "izin_sakit":
-                return (
-                    f"{row['nama_lengkap'].title()} memiliki "
-                    f"{int(row['izin_sakit'])} hari izin sakit."
-                )
-
-            return "Informasi tersebut tersedia di data, namun belum dapat ditampilkan."
+            return "Informasi tersebut tersedia di data."
 
         # =========================
-        # 7. TABLE RESPONSE
+        # TABLE RESPONSE
         # =========================
-        if intent["response_type"] == "table":
+        if intent.get("response_type") == "table":
             if df.empty:
                 return "Data tidak ditemukan."
-
             if intent.get("target_columns"):
                 return render_detail_table(df)
-
             return render_summary_table(df)
 
-        # =========================
-        # DEFAULT SAFETY
-        # =========================
         return "Maaf, saya belum memahami permintaan tersebut."
 
     except Exception:
